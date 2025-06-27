@@ -1,13 +1,18 @@
 window.onload = () => __init__(2);
 let counter = 0;
 let guess_colour = [0,0,0,0];
+let color_Id = [0,0,0,0];
 let errcount = 0;
 let matchId;
 
-
-
-function guessclick(){
-
+setInterval(() => ping(),1000);
+async function ping() {
+    await fetch("http://127.0.0.1:8000/ping/"+matchId);
+}
+async function guessclick(){
+    const response = await fetch("http://127.0.0.1:8000/checkcolor/"+matchId+"?player_colour="+color_Id.join("&player_colour="));
+    const data = await response.json();
+    console.log(data);
 
     if(counter >= 3)
     {
@@ -53,6 +58,7 @@ function colorsel(idk,num,basecol){
           radial-gradient(circle at 30% 30%, ${highlightColor} 20%, ${baseColor} 80%)
         `;
             guess_colour[counter] = basecol;
+            color_Id[counter]= num;
             counter++;
         }
         check=false;
@@ -60,6 +66,11 @@ function colorsel(idk,num,basecol){
     return null;
 }
 async function __init__(diff) {
+    const response = await fetch("http://127.0.0.1:8000/init_id/"+diff);
+    const data = await response.json();
+
+    matchId = data[0];
+
     let colors;
     switch(diff) {
         case 2: colors = 8; break;
