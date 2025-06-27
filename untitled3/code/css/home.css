@@ -393,19 +393,53 @@ button:hover {
 
 
 .loader{
+    display: none;
     position: relative;
-    display: flex;
     justify-content: center;
     justify-items: center;
 }
 
 .loader:before{
     content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
     background: rgba(255, 255, 255, 0);
-    z-index: 20;
+    backdrop-filter: blur(4px);
+    position: absolute;
     width: 140px;
-
+    height: 55px;
+    z-index: 20;
+    border-radius: 0 0 10px 10px;
+    border: 1px solid rgba(255, 255, 255, 0.7);
+    border-top: none;
+    box-shadow: 0 15px 20px rgba(0, 0, 0, 0.2);
+    animation: loaderContAnimation 2s infinite;
 }
+
+.loader div{
+    background: rgba(255, 255, 255, 0.51);
+    border-radius: 50%;
+    width: 25px;
+    height: 25px;
+    z-index: 10;
+    animation: loaderCircleAnimation 2s infinite linear;
+    animation-delay: calc(-0.3s * var(--j));
+    transform: translateX(5px);
+    margin: 0.2em;
+}
+
+@keyframes loaderCircleAnimation {
+    0%, 100%{
+        transform: translateY(30px);
+    }
+    50%{
+        transform: translateY(-65px);
+    }
+}
+@keyframes loaderContAnimation {
+    0%, 100%{
+        transform: rotate(-10deg);
+    }
+    50%{
+        transform: rotate(10deg);
+    }
+}
+
