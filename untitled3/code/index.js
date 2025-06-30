@@ -130,8 +130,8 @@ function colorsel(idk, num, basecol) {
             counter++;
         }
 
-        check = false;
     }
+
 
     return null;
 }
