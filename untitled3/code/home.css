@@ -15,11 +15,9 @@ body {
     position: relative;
     min-height: 100vh;
     width: 100%;
-    background: linear-gradient(180deg, rgba(255, 255, 255, 0.53) 0%, rgba(0, 0, 0, 0.48) 100%);
     display: flex;
     justify-content: center;
     align-items: center;
-    padding: 40px;
 }
 
 .color {
@@ -67,8 +65,15 @@ body {
     width: 50%;
     height: 50%;
     background: #00ffff;
-    bottom: 25%;
+    bottom: 30%;
     right: 25%;
+}
+
+.color7{
+    width: 100%;
+    height: 100%;
+    background: #00ff04;
+    z-index: -2;
 }
 
 .logoCont {
@@ -586,3 +591,6 @@ button:hover {
 .sidebar .icon {
     font-size: 1.25rem;
 }
+
+
+
