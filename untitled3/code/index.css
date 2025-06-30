@@ -153,9 +153,8 @@ body {
 .box {
     /* glass-panel styling */
     background: rgba(255, 255, 255, 0.22);
-    border-radius: 10px;
     backdrop-filter: blur(4px);
-    box-shadow: 0px 25px 45px rgba(0, 0, 0, 0.31);
+    box-shadow: 0 25px 45px rgba(0, 0, 0, 0.31);
 
     --x: 50%;
     --y: 50%;
@@ -170,7 +169,6 @@ body {
     /* ↓ Replacement border for shine-on-border effect ↓ */
     border: 4px solid transparent;       /* space for the glow */
     border-radius: 10px;                  /* keep same rounding */
-    border-image-slice: 1;
     border-image-width: 4px;
     border-image-source: radial-gradient(
             circle at var(--x, 50%) var(--y, 50%),
@@ -181,7 +179,9 @@ body {
     transition: border-image-source 0.05s ease;
 }
 
-
+.box {
+    border-image-slice: 1;
+}
 
 
 #guesses, #palette {
@@ -667,4 +667,42 @@ button:hover {
 }
 
 
-.cBox
+.modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.7);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 99999;
+    backdrop-filter: blur(4px);
+}
+
+.modal-content {
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 15px;
+    padding: 40px;
+    text-align: center;
+    box-shadow: 0 0 30px white;
+    backdrop-filter: blur(6px);
+    color: white;
+    font-size: 1.5rem;
+}
+
+.modal-content button {
+    margin-top: 20px;
+    padding: 10px 20px;
+    background: white;
+    color: black;
+    border: none;
+    border-radius: 8px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.hidden {
+    display: none;
+}

@@ -1,9 +1,9 @@
 const boxes = Array.from(document.querySelectorAll('.box'));
 
 // Parameters — tweak as desired
-const MAX_DIST   = 300;   
-const MIN_OPACITY = 0.0;  
-const MAX_OPACITY = 0.8;  
+const MAX_DIST   = 300;
+const MIN_OPACITY = 0.0;
+const MAX_OPACITY = 0.8;
 
 document.addEventListener('mousemove', e => {
     boxes.forEach(box => {
