@@ -94,7 +94,7 @@ async function guessclick() {
         k++;
 
         const errors = document.getElementById("errors");
-        errors.scrollTo({ top: errors.scrollHeight, behavior: 'smooth' });
+        smoothScrollToBottom(errors, 1500);
 
         // ✅ Win check — did the player win?
         const lastHelpCont = document.getElementById("helpcont" + (k - 1));
@@ -195,6 +195,28 @@ function clear() {
     counter = 0;
     return null;
 }
+
+function smoothScrollToBottom(el, duration = 300) {
+    const start = el.scrollTop;
+    const end = el.scrollHeight;
+    const distance = end - start;
+    const startTime = performance.now();
+
+    function animateScroll(currentTime) {
+        const elapsed = currentTime - startTime;
+        const progress = Math.min(elapsed / duration, 1);
+        el.scrollTop = start + distance * easeOutCubic(progress);
+        if (progress < 1) requestAnimationFrame(animateScroll);
+    }
+
+    function easeOutCubic(t) {
+        return 1 - Math.pow(1 - t, 3);
+    }
+
+    requestAnimationFrame(animateScroll);
+}
+
+
 function showWinModal() {
     document.getElementById("winModal").classList.remove("hidden");
 }
