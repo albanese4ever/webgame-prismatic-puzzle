@@ -1,11 +1,30 @@
-function change_class_bodyCont(){
-    document.getElementById("rimuovere").classList.remove("bodyCont");
-    document.getElementById("rimuovere").classList.add("displayNone");
-    document.getElementById("aggiungere").style.display = "flex";
+function change_class_bodyCont() {
+    // Nasconde la sezione iniziale
+    const bodyCont = document.getElementById("rimuovere");
+    bodyCont.classList.remove("bodyCont");
+    bodyCont.classList.add("displayNone");
+
+    // Crea dinamicamente il blocco generalPlayCont
+    const cont = document.querySelector(".cont");
+
+    const generalPlayCont = document.createElement("div");
+    generalPlayCont.className = "generalPlayCont";
+    generalPlayCont.id = "aggiungere";
+    generalPlayCont.style.display = "flex";
+
+    generalPlayCont.innerHTML = `
+        <div class="playCont">
+            <button type="button">Crea</button>
+            
+            <div class="join">
+                <input id="inserisci" name="inserisci" type="number" placeholder="Inserisci Codice" required>
+                <button class="button" type="submit">Join</button>
+            </div>
+        </div>
+    `;
+
+    cont.appendChild(generalPlayCont);
 }
-
-
-
 
 
 
