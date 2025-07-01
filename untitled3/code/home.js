@@ -33,3 +33,23 @@ options.forEach(opt => {
         moveBackgroundTo(opt);
     });
 });
+
+//HELP
+document.addEventListener("DOMContentLoaded", () => {
+    const helpBtn = document.getElementById("helpBtn");
+    const helpPanel = document.getElementById("helpPanel0");
+    const sidebarToggle = document.getElementById("sidebar-toggle");
+
+    if (helpBtn && helpPanel && sidebarToggle) {
+        helpBtn.addEventListener("click", (e) => {
+            e.preventDefault();
+            helpPanel.classList.toggle("active");
+        });
+
+        sidebarToggle.addEventListener("change", () => {
+            if (!sidebarToggle.checked) {
+                helpPanel.classList.remove("active");
+            }
+        });
+    }
+});

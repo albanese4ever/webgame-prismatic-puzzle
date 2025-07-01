@@ -593,4 +593,70 @@ button:hover {
 }
 
 
+/*HELP*/
+.help-panel {
+    position: fixed;
+    bottom: 20px;
+    left: 260px; /* accanto alla sidebar */
+    width: 320px;
+    height: 400px;
+    background: rgba(255, 255, 255, 0.08);
+    backdrop-filter: blur(12px);
+    border-radius: 20px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    padding: 1.5rem 1rem;
+    display: flex;
+    flex-direction: column;
+    z-index: 9;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+    overflow-y: auto;
+    overflow-x: hidden;
+    scrollbar-color: #ffffff rgba(255, 255, 255, 0);
+    transition: transform 0.3s ease, opacity 0.3s ease;
+    box-sizing: border-box;
+
+    /* fuori da sx */
+    transform: translateX(-30px);
+    opacity: 0;
+    pointer-events: none;
+}
+
+.help-panel.active {
+    transform: translateX(0); /* dentro da dx */
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.help-panel::-webkit-scrollbar {
+    width: 6px;
+}
+
+.help-panel::-webkit-scrollbar-thumb {
+    background-color: #ffffff;
+    border-radius: 4px;
+}
+
+.help-panel::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 0);
+}
+
+.help-panel h3 {
+    color: white;
+    font-size: 1.3rem;
+    margin-top: 1rem;
+    text-shadow: 0 0 5px black;
+    word-wrap: break-word;
+}
+
+.help-panel p {
+    color: white;
+    font-size: 1rem;
+    margin-bottom: 1rem;
+    line-height: 1.4;
+    text-shadow: 0 0 2px black;
+    word-wrap: break-word;
+}
+
+
+
 
