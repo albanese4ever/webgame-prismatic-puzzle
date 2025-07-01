@@ -1,33 +1,3 @@
-function change_class_bodyCont() {
-    // Nasconde la sezione iniziale
-    const bodyCont = document.getElementById("rimuovere");
-    bodyCont.classList.remove("bodyCont");
-    bodyCont.classList.add("displayNone");
-
-    // Crea dinamicamente il blocco generalPlayCont
-    const cont = document.querySelector(".cont");
-
-    const generalPlayCont = document.createElement("div");
-    generalPlayCont.className = "generalPlayCont";
-    generalPlayCont.id = "aggiungere";
-    generalPlayCont.style.display = "flex";
-
-    generalPlayCont.innerHTML = `
-        <div class="playCont">
-            <button type="button">Crea</button>
-            
-            <div class="join">
-                <input id="inserisci" name="inserisci" type="number" placeholder="Inserisci Codice" required>
-                <button class="button" type="submit">Join</button>
-            </div>
-        </div>
-    `;
-
-    cont.appendChild(generalPlayCont);
-}
-
-
-
 const options = document.querySelectorAll('.difficulty-option');
 const bg      = document.querySelector('.selector-background');
 

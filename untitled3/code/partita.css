@@ -1,0 +1,390 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: 'Poppins', sans-serif;
+    color: rgba(255, 255, 255, 0.79);
+    text-shadow: 0 0 5px #fff, 0 0 10px #fff, -1px -1px 2px black, 1px 1px 2px black;
+}
+
+body {
+    overflow: hidden;
+}
+
+.cont {
+    position: relative;
+    min-height: 100vh;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.color {
+    position: absolute;
+    filter: blur(100px);
+    z-index: 0;
+}
+
+@keyframes color1animation {
+    0% { top: -15%; left: 50%; transform: translateX(-50%); }
+    25% { top: 5%; left: 15%; transform: translateX(-50%); }
+    50% { top: 80%; left: 50%; transform: translateX(-50%); }
+    75% { top: 5%; left: 85%; transform: translateX(-50%); }
+    100% { top: -15%; left: 50%; transform: translateX(-50%); }
+}
+
+@keyframes color2animation {
+    0% { bottom: -30%; left: 20%; }
+    25% { bottom: -30%; left: 50%; }
+    50% { bottom: 50%; left: 40%; }
+    75% { bottom: 20%; left: -15%; }
+    100% { bottom: -30%; left: 20%; }
+}
+
+.color1 {
+    width: 100%;
+    height: 100%;
+    background: deeppink;
+    top: -15%;
+    left: 50%;
+    transform: translateX(-50%);
+    animation: color1animation 4s infinite linear;
+}
+
+.color2 {
+    width: 90%;
+    height: 90%;
+    background: #fff778;
+    left: 20%;
+    bottom: -30%;
+    animation: color2animation 4s infinite linear;
+}
+
+.color3 {
+    width: 50%;
+    height: 50%;
+    background: #00ffff;
+    bottom: 30%;
+    right: 25%;
+}
+
+.color7{
+    width: 100%;
+    height: 100%;
+    background: #00ff04;
+    z-index: -2;
+}
+
+
+.btnCont {
+    display: flex;
+    gap: 20px;
+    margin-top: 40px;
+    z-index: 2;
+}
+
+button {
+    width: 130px;
+    height: 50px;
+    color: white;
+    background: rgba(255, 255, 255, 0.22);
+    border-radius: 10px;
+    backdrop-filter: blur(10px);
+    box-shadow: 0 0 10px 3px rgba(255, 255, 255, 0.62);
+    border: 1px solid rgba(255, 255, 255, 0.7);
+    transition: background 300ms, box-shadow 300ms;
+    font-weight: bold;
+}
+
+button:hover {
+    background: rgba(255, 255, 255, 0.62);
+    box-shadow: 0 0 10px 0 rgba(255, 255, 255, 0.62);
+    cursor: pointer;
+}
+.bodyCont{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+@keyframes squareAnimation {
+    0%,100% {
+        transform: translateY(-300%) ;
+    }
+    33% {
+        transform:translateX(300%) ;
+    }
+    66% {
+        transform:translate(-300%) ;
+    }
+}
+
+.smallSquares {
+    position: absolute;
+    backdrop-filter: blur(1px);
+    box-shadow: 0 25px 45px rgba(0, 0, 0, 0.2);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-left: 1px solid rgba(255, 255, 255, 0.7);
+    border-top: 1px solid rgba(255, 255, 255, 0.7);
+    border-radius: 10px;
+    animation: squareAnimation 10s linear infinite;
+    animation-delay: calc((var(--i) * -15s) + 1);
+    animation-duration: calc(var(--i) * 1.2s + 20s);
+    z-index: 1;
+}
+
+
+.smallSquares:nth-child(4) {
+    width: 100px;
+    height: 100px;
+    top: 20%;
+    right: 91%;
+}
+.smallSquares:nth-child(5) {
+    width: 100px;
+    height: 100px;
+    top: 5%;
+    right: 70%;
+}
+.smallSquares:nth-child(6) {
+    width: 100px;
+    height: 100px;
+    top: 80%;
+    right: 10%;
+}
+.smallSquares:nth-child(7) {
+    width: 100px;
+    height: 100px;
+    top: 67%;
+    right: 38%;
+}
+.smallSquares:nth-child(8) {
+    width: 80px;
+    height: 80px;
+    top: 42%;
+    right: 70%;
+}
+.smallSquares:nth-child(9) {
+    width: 80px;
+    height: 80px;
+    top: 82%;
+    right: 86%;
+}
+.smallSquares:nth-child(10) {
+    width: 80px;
+    height: 80px;
+    top: 30%;
+    right: 50%;
+}
+.smallSquares:nth-child(11) {
+    width: 80px;
+    height: 80px;
+    top: 74%;
+    right: 6%;
+}
+.smallSquares:nth-child(12) {
+    width: 80px;
+    height: 80px;
+    top: 20%;
+    right: 10%;
+}
+.smallSquares:nth-child(13) {
+    width: 70px;
+    height: 70px;
+    top: 20%;
+    right: 45%;
+}
+.smallSquares:nth-child(14) {
+    width: 60px;
+    height: 60px;
+    top: 60%;
+    right: 70%;
+}
+.smallSquares:nth-child(15) {
+    width: 25px;
+    height: 25px;
+    top: 66%;
+    border-radius: 3px;
+    right: 29%;
+}
+.smallSquares:nth-child(16) {
+    width: 40px;
+    height: 40px;
+    top: 39%;
+    right: 75%;
+    z-index: -2;
+}
+.smallSquares:nth-child(17) {
+    width: 100px;
+    height: 100px;
+    top: 65%;
+    right: 50%;
+}
+.smallSquares:nth-child(18) {
+    width: 35px;
+    height: 35px;
+    top: 69%;
+    right: 30%;
+    border-radius: 5px;
+}
+.smallSquares:nth-child(19) {
+    width: 150px;
+    height: 150px;
+    top: 60%;
+    right: 40%;
+    border-radius: 10px;
+}
+.smallSquares:nth-child(20) {
+    width: 60px;
+    height: 60px;
+    top: 50%;
+    right: 50%;
+    border-radius: 5px;
+}
+.smallSquares:nth-child(21) {
+    width: 70px;
+    height: 70px;
+    top: 90%;
+    right: 60%;
+    border-radius: 8px;
+}
+.smallSquares:nth-child(22) {
+    width: 35px;
+    height: 35px;
+    top: 69%;
+    right: 30%;
+    border-radius: 5px;
+}
+.smallSquares:nth-child(23) {
+    width: 35px;
+    height: 35px;
+    top: 69%;
+    right: 50%;
+    border-radius: 5px;
+}
+.smallSquares:nth-child(24) {
+    width: 40px;
+    height: 40px;
+    top: 89%;
+    right: 30%;
+    border-radius: 5px;
+}
+.smallSquares:nth-child(25) {
+    width: 50px;
+    height: 50px;
+    top: 99%;
+    right: 80%;
+    border-radius: 5px;
+}
+
+.smallSquares {
+    animation-direction: normal;
+}
+
+.smallSquares.reverse {
+    animation-direction: reverse !important;
+}
+
+.playCont {
+    display: flex; /* visibile solo quando serve */
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+    margin-top: 30px;
+    z-index: 10;
+    width: 80%;
+}
+
+.generalPlayCont .playCont {
+    display: flex;
+    flex-direction: column;  /* da row a colonna */
+    align-items: center;
+    gap: 20px;               /* spazio verticale tra crea e join */
+    background: rgba(255, 255, 255, 0.08);
+    padding: 20px 30px;
+    border-radius: 20px;
+    backdrop-filter: blur(10px);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.25);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    width: 100%;
+    max-width: 400px;
+    box-sizing: border-box;
+}
+
+.creaCont {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    align-items: center;
+}
+
+.creaCont button[type="button"] {
+    height: 40px;
+    padding: 0 25px;
+    font-weight: bold;
+    font-size: 1rem;
+    color: white;
+    background: rgba(255, 255, 255, 0.22);
+    border-radius: 10px;
+    backdrop-filter: blur(10px);
+    box-shadow: 0 0 10px 3px rgba(255, 255, 255, 0.62);
+    border: 1px solid rgba(255, 255, 255, 0.7);
+    transition: background 300ms, box-shadow 300ms;
+    cursor: pointer;
+}
+
+/* Sezione join */
+.join {
+    display: flex;
+    gap: 0;               /* incollati input e bottone */
+    width: 100%;
+    justify-content: center;
+}
+
+.join input {
+    flex: 1;
+    height: 40px;
+    padding: 0 15px;
+    font-size: 1rem;
+    border-top-left-radius: 10px;
+    border-bottom-left-radius: 10px;
+    border: 1px solid rgba(255, 255, 255, 0.6);
+    border-right: none;
+    background: rgba(255, 255, 255, 0.15);
+    color: white;
+    outline: none;
+    backdrop-filter: blur(4px);
+    box-shadow: 0 0 10px 2px rgba(255, 255, 255, 0.2);
+}
+
+/* Placeholder colore */
+.join input::placeholder {
+    color: rgba(255, 255, 255, 0.6);
+}
+
+/* Bottone Join */
+.join button.button {
+    height: 40px;
+    padding: 0 20px;
+    font-weight: bold;
+    font-size: 1rem;
+    color: white;
+    background: rgba(255, 255, 255, 0.22);
+    border-top-right-radius: 10px;
+    border-bottom-right-radius: 10px;
+    border: 1px solid rgba(255, 255, 255, 0.7);
+    border-left: none;
+    backdrop-filter: blur(10px);
+    box-shadow: 0 0 10px 3px rgba(255, 255, 255, 0.62);
+    transition: background 300ms, box-shadow 300ms;
+    cursor: pointer;
+}
+
+.join button.button:hover,
+.creaCont button[type="button"]:hover {
+    background: rgba(255, 255, 255, 0.62);
+    box-shadow: 0 0 10px 0 rgba(255, 255, 255, 0.62);
+}
