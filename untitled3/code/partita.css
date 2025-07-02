@@ -514,19 +514,40 @@ button:hover {
     align-items: center;
 }
 
-.playCont {
-    display: flex;
-    flex-direction: column;
-    height: 250px;
-    padding: 20px;
-    z-index: 10;
-    background: rgba(255, 255, 255, 0.22);
+.box {
+    /* glass-panel styling */
+    background: rgba(163, 160, 160, 0.22);
     backdrop-filter: blur(4px);
     box-shadow: 0 25px 45px rgba(0, 0, 0, 0.31);
-    border-radius: 15px;
-    align-items: center;
-    justify-content: space-evenly;
+
+    --x: 50%;
+    --y: 50%;
+    --shine-opacity: 0;
+    /* layout */
+    display: flex;
+    flex-direction: column;
+    height: auto;
+    padding: 30px;
+    z-index: 10;
+    gap: 1rem;
+
+    /* ↓ Replacement border for shine-on-border effect ↓ */
+    border: 4px solid transparent;       /* space for the glow */
+    border-radius: 10px;                  /* keep same rounding */
+    border-image-width: 4px;
+    border-image-source: radial-gradient(
+            circle at var(--x, 50%) var(--y, 50%),
+            rgba(255, 255, 255, var(--shine-opacity, 0)) 0%,
+            transparent 70%
+    );
+    clip-path: inset(0 round 10px);
+    transition: border-image-source 0.05s ease;
 }
+
+.box {
+    border-image-slice: 1;
+}
+
 
 /* CREA + JOIN: struttura condivisa */
 .creaCont,
@@ -545,7 +566,7 @@ button:hover {
     flex: 1;
     padding: 0 15px;
     font-size: 1rem;
-    background: rgba(255, 255, 255, 0.22);
+    background: rgba(163, 160, 160, 0.22);
     backdrop-filter: blur(10px);
     box-shadow: 0 0 10px 3px rgba(255, 255, 255, 0.62);
     border: 1px solid rgba(255, 255, 255, 0.7);
@@ -555,7 +576,7 @@ button:hover {
     align-items: center;
     width: 130px;
     height: 50px;
-    border-radius: 15px;
+    border-radius: 10px;
     transition: background 300ms, box-shadow 300ms;
     font-weight: bold;
 }
@@ -563,12 +584,5 @@ button:hover {
 
 /* Placeholder JOIN */
 .joinCont input::placeholder {
-    color: rgba(255, 255, 255, 0.6);
+    color: rgba(255, 255, 255, 0.62);
 }
-
-.creaCont button:hover,
-.joinCont button:hover {
-    background: rgba(255, 255, 255, 0.62);
-    box-shadow: 0 0 10px rgba(255, 255, 255, 0.62);
-}
-

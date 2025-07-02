@@ -145,22 +145,37 @@ body {
 }
 
 .box {
-    background: rgba(255, 255, 255, 0.22);
-    border-radius: 10px;
+    /* glass-panel styling */
+    background: rgba(163, 160, 160, 0.22);
     backdrop-filter: blur(4px);
     box-shadow: 0 25px 45px rgba(0, 0, 0, 0.31);
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    border-left: 1px solid rgba(255, 255, 255, 0.7);
-    border-top: 1px solid rgba(255, 255, 255, 0.7);
+
+    --x: 50%;
+    --y: 50%;
+    --shine-opacity: 0;
+    /* layout */
     display: flex;
     flex-direction: column;
     height: auto;
     padding: 20px;
     z-index: 10;
+
+    /* ↓ Replacement border for shine-on-border effect ↓ */
+    border: 4px solid transparent;       /* space for the glow */
+    border-radius: 10px;                  /* keep same rounding */
+    border-image-width: 4px;
+    border-image-source: radial-gradient(
+            circle at var(--x, 50%) var(--y, 50%),
+            rgba(255, 255, 255, var(--shine-opacity, 0)) 0%,
+            transparent 70%);
+
+    clip-path: inset(0 round 10px);
+    transition: border-image-source 0.05s ease;
 }
 
-
-
+.box {
+    border-image-slice: 1;
+}
 
 
 #ranking, #personalRecord{
@@ -208,7 +223,7 @@ button {
     width: 130px;
     height: 50px;
     color: white;
-    background: rgba(255, 255, 255, 0.22);
+    background: rgba(163, 160, 160, 0.22);
     border-radius: 10px;
     backdrop-filter: blur(10px);
     box-shadow: 0 0 10px 3px rgba(255, 255, 255, 0.62);
@@ -218,7 +233,7 @@ button {
 }
 
 button:hover {
-    background: rgba(255, 255, 255, 0.62);
+    background: rgba(180, 180, 180, 0.62);
     box-shadow: 0 0 10px 0 rgba(255, 255, 255, 0.62);
     cursor: pointer;
 }
@@ -247,6 +262,7 @@ button:hover {
     animation: squareAnimation 10s linear infinite;
     animation-delay: calc((var(--i) * -15s) + 1);
     animation-duration: calc(var(--i) * 1.2s + 20s);
+    z-index: -1;
 }
 
 
@@ -428,13 +444,13 @@ button:hover {
     margin: 10px 20px;
     transition: transform 300ms;
     z-index: 9999;
-    cursor: pointer;
 }
 
 .logoCont:hover {
     transform: scale(0.15);
     box-shadow: none;
 }
+
 .logo {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
@@ -457,8 +473,8 @@ button:hover {
     transition: transform 300ms;
 }
 
-.logoCont:hover .logo{
-    transform:  rotate(180deg);
+.logoCont:hover .logo {
+    transform: rotate(180deg);
 }
 
 
