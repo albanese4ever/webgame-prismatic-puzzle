@@ -266,18 +266,27 @@ def check_colour(ID: str, player_colour: list[int] = Query()):
 @app.get("/profile/add/{user}")
 def add_profilo(user: str, password: str = Query():
     exist = -1
-    with open("profili.txt","a") as file:
+    with open("profili.txt","a+") as file:
         for line in file:
-            if user in line:
+            if user == line.split(",")[0]:
                 exist = 1
         if exist == -1:
-            #utente, partite giocate, partite vinte
-            file.write(f"{user}, {password}")
+            uniqueID = str(uuid4())
+            file.write(f"{user},{password}," + uniqueID)
+            return uniqueID
+        else:
+            return -1
 
 @app.get("/profile/get/{user}")
-def get_profilo(user: str):
+def get_profilo(user: str, password: str = Query()):
     with open("profili.txt","r") as file:
         for line in file:
             if line.find(user) != -1:
-                return line
-    return -1 #se si preferisce cambiare a KO
+                temp = line.split(",")
+                if password == temp[1]:
+                    print("pass giusto")
+                    return temp[2] #password giusta
+                else:
+                    print("pass sbagliata")
+                    return 0 #password sbagliata
+    return -1 #account non trovato
