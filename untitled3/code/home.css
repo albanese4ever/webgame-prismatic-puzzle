@@ -426,7 +426,7 @@ button:hover {
     height: 25px;
     z-index: 10;
     animation: loaderCircleAnimation 2s infinite linear;
-    animation-delay: calc(-0.3s * var(--j));
+    animation-delay: calc(-0.3s * var(--i));
     transform: translateX(5px);
     margin: 0.2em;
 }
