@@ -107,7 +107,7 @@ def init_id(difficulty: int, multi: bool, code: int = Query(default=None)):
             shuffle(solution)
         else:
             raise HTTPException(status_code=400, detail="Invalid difficulty")
-
+        solution = solution[:4]
         ID = str(uuid4())
         IDList[ID] = {
             'difficolta': difficulty,
@@ -261,6 +261,10 @@ def check_colour(ID: str, player_colour: list[int] = Query()):
                         else:
                             risposte[1] += 1
                         break  # exit inner loop after a match
+            if risposte[0] == 4:
+                for i in range(len(MultiList[code]['IDs'])):
+                    IDList[MultiList[code]['IDs'][i]]['win'] = 2
+                IDList[ID]['win'] = 1
     return list(risposte)
 
 @app.get("/profile/add/{user}")
@@ -272,7 +276,7 @@ def add_profilo(user: str, password: str = Query():
                 exist = 1
         if exist == -1:
             uniqueID = str(uuid4())
-            file.write(f"{user},{password}," + uniqueID)
+            file.write(f"{user},{password}," + uniqueID + ",:")
             return uniqueID
         else:
             return -1
