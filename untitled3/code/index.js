@@ -1,12 +1,4 @@
-let diff = parseInt(localStorage.getItem("difficulty"));
-let multi = parseInt(localStorage.getItem("multi"));
-let wincheck = 0;
-if (document.readyState === 'complete') {
-        __init__(diff);
-} else {
-    window.addEventListener('load', () => __init__(diff));
-
-}
+window.onload = () => __init__(2);
 
 let counter = 0;
 let guess_colour = [0, 0, 0, 0];
@@ -18,21 +10,11 @@ let k = 0;
 setInterval(() => ping(), 1000);
 
 async function ping() {
-    console.log(matchId);
-    const response = await fetch("http://127.0.0.1:8000/ping/" + matchId);
-    const data = await response.json();
-    wincheck = data;
-    console.log(data)
-    if (wincheck === 1) {
-        showWinModal();
-    }else if(wincheck === 2) {
-        showLoseModal();
-    }
+    await fetch("http://127.0.0.1:8000/ping/" + matchId);
 }
 
 async function guessclick() {
-    console.log(diff);
-    const response = await fetch("http://127.0.0.1:8000/checkcolor/" + matchId + "/"  + localStorage.getItem('code') + "?player_colour=" + color_Id.join("&player_colour="));
+    const response = await fetch("http://127.0.0.1:8000/checkcolor/" + matchId + "?player_colour=" + color_Id.join("&player_colour="));
     const data = await response.json();
 
     if (counter >= 3) {
@@ -118,7 +100,10 @@ async function guessclick() {
         const lastHelpCont = document.getElementById("helpcont" + (k - 1));
         const greenCircles = lastHelpCont.querySelectorAll(".correct");
 
+        if (greenCircles.length === 4) {
+            showWinModal();
 
+        }
     }
 
     return null;
@@ -152,27 +137,17 @@ function colorsel(idk, num, basecol) {
 }
 
 async function __init__(diff) {
-    console.log("loaded")
-    console.log(diff);
-    let response;
-    if(multi===1){
-        response = await fetch("http://127.0.0.1:8000/init_id/" + diff+ "/"+ localStorage.getItem("code") + "/?multi=true");
-    }else{
-        response = await fetch("http://127.0.0.1:8000/init_id/" + diff + "/0?multi=false" );
-    }
-
-
+    const response = await fetch("http://127.0.0.1:8000/init_id/" + diff);
     const data = await response.json();
-    matchId = data;
-    console.log(matchId)
+    matchId = data[0];
 
     let colors;
     switch (diff) {
         case 2: colors = 8; break;
         case 3: colors = 10; break;
-        case 1: colors = 6; break;
+        case 4: colors = 12; break;
+        default: colors = 6; break;
     }
-    console.log(colors)
 
     const palette = document.getElementById("palette");
     const guess = document.getElementById("guesses");
@@ -187,7 +162,12 @@ async function __init__(diff) {
 
         const newDiv = document.createElement("div");
         newDiv.classList.add("colorCircles");
-        newDiv.addEventListener("click", (e) => colorsel(e, i, baseHue));
+        <!--Audio color modificato-->
+        newDiv.addEventListener("click", (e) => {
+            colorsel(e, i, baseHue);
+            clickSound.currentTime = 0;
+            clickSound.play();
+        }); <!--fine-->
         newDiv.style.background = `
             radial-gradient(circle at 30% 30%, ${highlightColor} 20%, ${baseColor} 80%)
         `;
@@ -245,10 +225,9 @@ function smoothScrollToBottom(el, duration = 300) {
 function showWinModal() {
     document.getElementById("winModal").classList.remove("hidden");
 }
-function showLoseModal() {
-    document.getElementById("lostModal").classList.remove("hidden");
-}
 
-function closeModal() {
-    window.location.href="home.html";
+function closeWinModal() {
+    document.getElementById("winModal").classList.add("hidden");
 }
+<!--Audio color-->
+const clickSound = document.getElementById("click-sound");

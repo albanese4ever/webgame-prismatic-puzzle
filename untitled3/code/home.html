@@ -60,17 +60,21 @@
         <li><a href="index.html"><span class="icon">▶️</span><span>Play</span></a></li>
         <li><a href="#"><span class="icon">🗂️</span><span>Levels</span></a></li>
         <li><a href="leaderBoard.html"><span class="icon">🏆</span><span>Leaderboard</span></a></li>
-        <li><a onclick=logincheck()><span class="icon">👤</span><span>Profile</span></a></li>
-        <li><a href="#"><span class="icon">⚙️</span><span>Settings</span></a></li>
+        <li><a href="login.html" id="profileBtn"><span class="icon">👤</span><span>Profile</span></a></li>
+        <li><a href="#" id="settingsBtn"><span class="icon">⚙️</span><span>Settings</span></a></li>
     </ul>
     <ul class="bottom-menu">
         <li><a href="#" id="helpBtn"><span class="icon">❓</span><span>Help</span></a></li>
-        <li><a onclick=logout()><span class="icon" id="logout">🚪</span><span></span></a></li>
+        <li><a href="#"><span class="icon">🚪</span><span>Logout</span></a></li>
     </ul>
 </aside>
 
+<!--audio-->
+<audio src="../audio/music.mp3" autoplay loop></audio>
+
+
 <!--HELP-->
-<div class="help-panel" id="helpPanel0">
+<div class="sidePanelCont" id="helpPanel0">
     <h3>🎮 Single Player</h3>
     <p>
         In questa modalità giochi contro il computer.<br>
@@ -130,6 +134,26 @@
 </div>
 
 
+
+<div class="sidePanelCont" id="profilePanel0">
+    <h3>👤  Profile</h3>
+</div>
+
+
+<div class="sidePanelCont" id="settingsPanel0">
+    <h3>⚙️ Settings</h3>
+    <div class="audio-group">
+        <label for="musicVolume">🎶 Music Volume</label>
+        <div class="audio-controls-row">
+            <input type="range" id="musicVolume" min="0" max="1" step="0.01">
+            <button id="musicMute">🔊</button>
+        </div>
+    </div>
+
+
+</div>
+
+
 <!--sfondo-->
 <div class="cont">
     <div class="color color1"></div>
@@ -165,8 +189,8 @@
 
 
         <div class="btnCont">
-            <button type="button" onclick="singleplayerclick()">Single Player</button>
-            <button type="button" onclick="multiplayerclick()">Multi Player</button>
+            <button type="button" onclick="window.location.href='index.html'">Single Player</button>
+            <button type="button" onclick="window.location.href='partita.html'">Multi Player</button>
         </div>
 
     </div>
@@ -202,6 +226,8 @@
 
 <script src="runaway.js"></script>
 <script src="home.js"></script>
+<script src="audio.js"></script>
+
 
 </body>
 </html>
