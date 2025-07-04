@@ -60,12 +60,12 @@
         <li><a href="index.html"><span class="icon">▶️</span><span>Play</span></a></li>
         <li><a href="#"><span class="icon">🗂️</span><span>Levels</span></a></li>
         <li><a href="leaderBoard.html"><span class="icon">🏆</span><span>Leaderboard</span></a></li>
-        <li><a href="login.html" id="profileBtn"><span class="icon">👤</span><span>Profile</span></a></li>
+        <li><a onclick=logincheck()><span class="icon">👤</span><span>Profile</span></a></li>
         <li><a href="#" id="settingsBtn"><span class="icon">⚙️</span><span>Settings</span></a></li>
     </ul>
     <ul class="bottom-menu">
         <li><a href="#" id="helpBtn"><span class="icon">❓</span><span>Help</span></a></li>
-        <li><a href="#"><span class="icon">🚪</span><span>Logout</span></a></li>
+        <li><a onclick=logout()><span class="icon" id="logout">🚪</span><span></span></a></li>
     </ul>
 </aside>
 
@@ -189,8 +189,8 @@
 
 
         <div class="btnCont">
-            <button type="button" onclick="window.location.href='index.html'">Single Player</button>
-            <button type="button" onclick="window.location.href='partita.html'">Multi Player</button>
+            <button type="button" onclick="singleplayerclick()">Single Player</button>
+            <button type="button" onclick="multiplayerclick()">Multi Player</button>
         </div>
 
     </div>

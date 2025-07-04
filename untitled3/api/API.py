@@ -61,7 +61,6 @@ def init_id(difficulty: int,code:int,multi: bool= Query()):
             raise HTTPException(status_code=400, detail="Invalid difficulty")
         solution = solution[:4]
         ID = str(uuid4())
-        print(ID)
         IDList[ID] = {
             'difficolta': difficulty,
             'tentativi': tries,
