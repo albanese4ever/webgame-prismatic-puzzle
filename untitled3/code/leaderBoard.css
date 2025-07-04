@@ -171,6 +171,8 @@ body {
 
     clip-path: inset(0 round 10px);
     transition: border-image-source 0.05s ease;
+    width: 100%;
+    max-width: 500px;
 }
 
 .box {
@@ -190,19 +192,6 @@ body {
     overflow-y: auto;
     scrollbar-color: #ffffff rgba(255, 255, 255, 0);
     transition: scrollbar-color 300ms;
-}
-
-
-.box .colorCircles {
-    width: 50px;
-    height: 50px;
-    border-left: 1px solid rgba(255, 255, 255, 0.7);
-    border-top: 1px solid rgba(255, 255, 255, 0.7);
-    border-radius: 50%;
-    box-shadow: 10px 10px 25px -15px rgba(0, 0, 0, 0.47);
-    cursor: pointer;
-
-
 }
 
 .box h2 {
@@ -541,4 +530,72 @@ button:hover {
     50%  { top: 60%; left: 20%; }
     75%  { top: 30%; left: 40%; }
     100% { top: 50%; left: 80%; }
+}
+
+/*Slider*/
+.glass-container {
+    width: 100%;
+    max-width: 500px;
+    margin: 0 auto;
+    display: flex;
+    position: relative;
+    padding: 10px;
+    background: rgba(163, 160, 160, 0.10);
+    border-radius: 20px;
+    border: 1px solid rgba(255,255,255,0.2);
+    backdrop-filter: blur(10px);
+    box-shadow: 0 8px 32px rgba(0,0,0,0.25);
+    gap: 10px;
+}
+
+.difficulty-option {
+    flex: 1;
+    text-align: center;
+    padding: 15px 10px;
+    border-radius: 15px;
+    cursor: pointer;
+    background: rgba(163, 160, 160, 0.05);
+    transition: all 0.3s ease;
+    font-size: 20px;
+    font-weight: 500;
+}
+
+.selector-background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 0;
+    height: 0;
+    background: rgba(163, 160, 160, 0.50);
+    border-radius: 15px;
+    backdrop-filter: blur(30px);
+    box-shadow: 0 0 15px rgba(255,255,255,0.2);
+    transition: all 0.3s ease;
+    pointer-events: none;
+    z-index: 0;
+}
+
+
+.difficulty-option:hover:not(.active) {
+    /* just a subtle lift, no scale */
+    transform: translateY(-2px);
+}
+
+.difficulty-option.active {
+    /* don’t change padding or font-size! */
+    backdrop-filter: blur(30px);        /* stronger blur */
+    background: rgba(255, 255, 255, 0.84);  /* brighter glass */
+    box-shadow: 0 0 15px rgba(255,255,255,0.2);
+    color: black;
+}
+
+/* Centra la leaderboard */
+.leaderboardCont {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin-top: 40px;
+    max-width: 100%;
+    align-items: center;
+
 }
