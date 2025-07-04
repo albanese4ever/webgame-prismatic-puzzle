@@ -1,0 +1,12 @@
+{
+  "name": "prismaticpuzzle",
+  "version": "1.0.0",
+  "description": "Un standalone giocco fatto durante il progetto di pcto",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron ."
+  },
+  "devDependencies": {
+    "electron": "^30.0.0"
+  }
+}
