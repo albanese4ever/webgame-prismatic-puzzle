@@ -1,33 +1,7 @@
+
+
 const options = document.querySelectorAll('.difficulty-option');
 const bg      = document.querySelector('.selector-background');
-
-let difficulty;
-function multiplayerclick(){
-    localStorage.setItem("multi","1");
-    localStorage.setItem("difficulty", "2");
-    window.location.href='partita.html'
-
-}
-function singleplayerclick(){
-    localStorage.setItem("multi","0");
-    localStorage.setItem("difficulty", difficulty);
-    window.location.href='index.html'
-}
-function logincheck(){
-    if(localStorage.getItem("token") === null){
-        window.location.href="login.html";
-    }else{
-        alert("Sei gia loggato ad un profilo.")
-    }
-}
-function logout() {
-    if (localStorage.getItem("token") !== null) {
-        localStorage.removeItem("token");
-        alert("Logout effettuato")
-        window.location.href = "home.html";
-    }
-    window.location.href = "login.html";
-}
 
 function moveBackgroundTo(el) {
     const rect = el.getBoundingClientRect();
@@ -57,6 +31,7 @@ function moveBackgroundTo(el) {
             difficulty = 3;
             break;
     }
+    localStorage.setItem('LBdifficulty', difficulty);
 }
 
 window.addEventListener('resize', () => {
@@ -68,7 +43,7 @@ window.addEventListener('resize', () => {
 // init
 const init = document.querySelector('.difficulty-option.active');
 if (init) moveBackgroundTo(init);
-
+window.onload = __innit__();
 // on click
 options.forEach(opt => {
     opt.addEventListener('click', () => {
@@ -78,5 +53,15 @@ options.forEach(opt => {
     });
 });
 
-
-
+async function __innit__(){
+    const container = document.getElementById('leaderboard-container');
+    const response = await fetch("http://127.0.0.1:8000/get/lb/" + localStorage.getItem("LBdifficulty"));
+    const data = await response.json();
+    console.log(data);
+    data.forEach((entry, i) => {
+        const entryDiv = document.createElement('div');
+        entryDiv.setAttribute("id", "LB" + i);
+        entryDiv.textContent = `${i + 1}. ${data.entry}`; // Personalizza secondo i tuoi dati
+        container.appendChild(entryDiv);
+    });
+}

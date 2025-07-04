@@ -22,12 +22,13 @@ middleware = [
 ]
 app = FastAPI(middleware=middleware)
 
+
+counter_nickname=0
 IDList = {}
 leaderboards = {
     1: [],
     2: [],
-    3: [],
-    4: []
+    3: []
 }
 MultiList = {}
 
@@ -161,12 +162,40 @@ def gettime(ID: str):
     # Singleplayer fallback
     leaderboards[difficulty].append(elapsed_time)
     leaderboards[difficulty].sort()
+    leaderboards[difficulty][:10]
     return {"status": "finished", "time": elapsed_time}
+    match (difficulty):
+        case 1:
+            with open("LBeasy.txt", "w") as f:
+                f.write("")
+            with open("LBeasy.txt", "a") as f:
+                for i in range(f.readlines()):
+                    f.write("Guest"+counter+":"+leaderboards[difficulty][i]+"\n")
+        case 1:
+            with open("LBmedium.txt", "w") as f:
+                f.write("")
+            with open("LBmedium.txt", "a") as f:
+                for i in range(f.readlines()):
+                    f.write("Guest"+counter+":"+leaderboards[difficulty][i]+"\n")
+        case 1:
+            with open("LBhard.txt", "w") as f:
+                f.write("")
+            with open("LBhard.txt", "a") as f:
+                for i in range(f.readlines()):
+                    f.write("Guest"+counter+":"+leaderboards[difficulty][i]+"\n")
 
-@app.get("/getlb")
-def getLB():
-    with open("leaderboard.txt", "r") as f:
-        return f.readlines()
+@app.get("/get/lb/{difficulty}")
+def getLB(difficulty: int):
+    match (difficulty):
+        case 1:
+            with open("LBeasy.txt","r") as f:
+                return f.readlines()
+        case 2:
+            with open("LBmedium.txt","r") as f:
+                return f.readlines()
+        case 3:
+            with open("LBhard.txt","r") as f:
+                return f.readlines()
 
 @app.get("/ping/{ID}")
 def ping(ID: str):
@@ -228,7 +257,7 @@ def add_profilo(user: str, password: str = Query()):
                 exist = 1
         if exist == -1:
             uniqueID = str(uuid4())
-            file.write(f"{user},{password}," + uniqueID + ",:")
+            file.write(f"{user},{password}," + uniqueID +"\n")
             return uniqueID
         else:
             return -1
