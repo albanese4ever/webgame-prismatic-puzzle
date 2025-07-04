@@ -23,9 +23,9 @@ async function ping() {
     const data = await response.json();
     wincheck = data;
     console.log(data)
-    if (wincheck == 1) {
+    if (wincheck === 1) {
         showWinModal();
-    }else if(wincheck == 2) {
+    }else if(wincheck === 2) {
         showLoseModal();
     }
 }
@@ -246,9 +246,9 @@ function showWinModal() {
     document.getElementById("winModal").classList.remove("hidden");
 }
 function showLoseModal() {
-    document.getElementById("winModal").classList.remove("hidden");
+    document.getElementById("lostModal").classList.remove("hidden");
 }
 
-function closeWinModal() {
-    document.getElementById("winModal").classList.add("hidden");
+function closeModal() {
+    window.location.href="home.html";
 }

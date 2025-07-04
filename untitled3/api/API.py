@@ -76,7 +76,7 @@ def init_id(difficulty: int,code:int,multi: bool= Query()):
             room = MultiList[code]
             MultiList[code]['IDs'].append(ID)
             IDList[ID]['soluzione'] = room['solution']
-        print(room['solution'])
+            print(room['solution'])
 
         return ID
 
