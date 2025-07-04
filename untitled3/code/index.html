@@ -7,7 +7,8 @@
     <link rel="icon" href="../img/logo.png" type="image/x-icon">
 </head>
 <body>
-
+<!--audio-->
+<audio src="../audio/music.mp3" autoplay loop></audio>
 
 <!--sfondo-->
 <div class="cont">
@@ -88,10 +89,6 @@
     </div>
 </div>
 
-<script defer src="index.js"></script>
-<script defer src="runaway.js"></script>
-<script defer src="glowingCursor.js"></script>
-
 
 <div id="winModal" class="modal hidden">
     <div class="modal-content">
@@ -100,14 +97,11 @@
         <button onclick="closeWinModal()">Close</button>
     </div>
 </div>
-<div id="lostModal" class="modal hidden">
-    <div class="modal-content">
-        <h1>HAI PERSO</h1>
-        <p>Coglione di merda, impara a giocare, neanche hitler fa cosi schifo!</p>
-        <button onclick="closeWinModal()">Close</button>
-    </div>
-</div>
 
+<script defer src="index.js"></script>
+<script defer src="runaway.js"></script>
+<script defer src="glowingCursor.js"></script>
+<script src="audio.js"></script>
 
 </body>
 </html>

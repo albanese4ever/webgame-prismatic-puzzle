@@ -594,7 +594,7 @@ button:hover {
 
 
 /*HELP*/
-.help-panel {
+.sidePanelCont {
     position: fixed;
     bottom: 20px;
     left: 260px; /* accanto alla sidebar */
@@ -621,26 +621,26 @@ button:hover {
     pointer-events: none;
 }
 
-.help-panel.active {
+.sidePanelCont.active {
     transform: translateX(0); /* dentro da dx */
     opacity: 1;
     pointer-events: auto;
 }
 
-.help-panel::-webkit-scrollbar {
+.sidePanelCont::-webkit-scrollbar {
     width: 6px;
 }
 
-.help-panel::-webkit-scrollbar-thumb {
+.sidePanelCont::-webkit-scrollbar-thumb {
     background-color: #ffffff;
     border-radius: 4px;
 }
 
-.help-panel::-webkit-scrollbar-track {
+.sidePanelCont::-webkit-scrollbar-track {
     background: rgba(163, 160, 160, 0);
 }
 
-.help-panel h3 {
+.sidePanelCont {
     color: white;
     font-size: 1.3rem;
     margin-top: 1rem;
@@ -648,7 +648,7 @@ button:hover {
     word-wrap: break-word;
 }
 
-.help-panel p {
+.sidePanelCont {
     color: white;
     font-size: 1rem;
     margin-bottom: 1rem;
@@ -656,3 +656,60 @@ button:hover {
     text-shadow: 0 0 2px black;
     word-wrap: break-word;
 }
+
+#helpPanel0{
+    bottom: 20px;
+    width: 320px;
+    height: 400px;
+}
+
+#profilePanel0, #settingsPanel0{
+    top: 20px;
+    width: 320px;
+    height: 400px;
+}
+
+.audio-group {
+    margin-top: 15px;
+    display: flex;
+    flex-direction: column; /* Label sopra slider */
+    gap: 8px; /* Spaziatura verticale tra label e slider+button */
+    color: white;
+    background: rgba(163, 160, 160, 0.5);
+    backdrop-filter: blur(12px);
+    border-radius: 20px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    padding: 10px;
+}
+
+.audio-group label {
+    font-weight: bold;
+}
+
+/* Contenitore per slider + bottone affiancati */
+.audio-controls-row {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    padding: -5px;
+}
+
+/* Slider prende più spazio */
+.audio-controls-row input[type="range"] {
+    flex: 1;
+    accent-color: rgb(148, 71, 189);
+}
+
+.audio-controls-row button {
+    width: 50px;
+    height: 50px;
+    padding: 0;
+    font-size: 1.2em;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 6px;
+}
+
+
