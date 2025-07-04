@@ -23,12 +23,12 @@
     <div class="bodyCont">
         <div class="playCont">
             <div class="creaCont">
-                <div class="crea"></div>
-                <button type="button">Crea</button>
+                <div class="crea" id="crea"></div>
+                <button type="button" onclick="creapartita()">Crea</button>
             </div>
             <div class="joinCont">
                 <input id="inserisci" name="inserisci" type="text" placeholder="Inserisci Codice" required>
-                <button class="button" type="submit">Join</button>
+                <button class="button" type="submit" onclick="joinpartita()">Join</button>
             </div>
         </div>
     </div>
@@ -59,6 +59,7 @@
 </div>
 
 <script src="runaway.js"></script>
+<script src="partita.js"></script>
 
 </body>
 </html>

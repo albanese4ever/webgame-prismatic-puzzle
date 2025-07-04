@@ -212,10 +212,11 @@ def check_colour(ID: str,code:int, player_colour: list[int] = Query(...)):
                         else:
                             risposte[1] += 1
                         break  # exit inner loop after a match
-            if risposte[0] == 4:
-                for i in range(len(MultiList[code]['IDs'])):
-                    IDList[MultiList[code]['IDs'][i]]['win'] = 2
-                IDList[ID]['win'] = 1
+            if code != 0:
+                if risposte[0] == 4:
+                    for i in range(len(MultiList[code]['IDs'])):
+                        IDList[MultiList[code]['IDs'][i]]['win'] = 2
+                    IDList[ID]['win'] = 1
     return list(risposte)
 
 @app.get("/profile/add/{user}")
