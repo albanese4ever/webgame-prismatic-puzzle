@@ -5,7 +5,6 @@ async function creapartita(){
     if(localStorage.getItem("code") === null){
         const response = await fetch("http://127.0.0.1:8000/create?difficulty=" + diff);
         const data = await response.json();
-        console.log(data);
         localStorage.setItem("code", data);
         document.getElementById("crea").innerHTML = localStorage.getItem("code");
     }
@@ -15,7 +14,6 @@ async function joinpartita(){
     const response = await fetch("http://127.0.0.1:8000/join/" + jcode);
     const data = await response.json();
     localStorage.setItem("code", jcode);
-    console.log(data);
 }
 
 async function checkjoined(){

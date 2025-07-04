@@ -53,7 +53,6 @@ function moveBackgroundTo(el) {
     bg.style.top    = y + 'px';
     const activeElement = document.querySelector('.difficulty-option.active');
     const dataValue = activeElement.getAttribute('data-value');
-    console.log(dataValue);
     switch (dataValue) {
         case 'easy':
             difficulty = 1;

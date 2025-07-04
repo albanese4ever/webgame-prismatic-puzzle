@@ -17,11 +17,9 @@ let k = 0;
 setInterval(() => ping(), 1000);
 
 async function ping() {
-    console.log(matchId);
     const response = await fetch("http://127.0.0.1:8000/ping/" + matchId);
     const data = await response.json();
     wincheck = data;
-    console.log(data)
     if (wincheck == 1) {
         showWinModal();
     }else if(wincheck == 2) {
@@ -30,7 +28,6 @@ async function ping() {
 }
 
 async function guessclick() {
-    console.log(diff);
     const response = await fetch("http://127.0.0.1:8000/checkcolor/" + matchId + "/"  + localStorage.getItem('code') + "?player_colour=" + color_Id.join("&player_colour="));
     const data = await response.json();
 

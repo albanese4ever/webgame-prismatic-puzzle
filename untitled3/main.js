@@ -15,7 +15,6 @@ function startBackend(){
 
 function stopBackend(){
     if (pythonBackend){
-        console.log("Chiudendo backend...");
         pythonBackend.kill();
     }
 }
@@ -45,6 +44,5 @@ app.on('window-all-closed', () => {
 });
 
 app.on('before-quit', () => {
-    console.log("Electron si sta chiudendo...")
     stopBackend();
 });

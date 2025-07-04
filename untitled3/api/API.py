@@ -164,38 +164,6 @@ def gettime(ID: str):
     leaderboards[difficulty].sort()
     leaderboards[difficulty][:10]
     return {"status": "finished", "time": elapsed_time}
-    match (difficulty):
-        case 1:
-            with open("LBeasy.txt", "w") as f:
-                f.write("")
-            with open("LBeasy.txt", "a") as f:
-                for i in range(f.readlines()):
-                    f.write("Guest"+counter+":"+leaderboards[difficulty][i]+"\n")
-        case 1:
-            with open("LBmedium.txt", "w") as f:
-                f.write("")
-            with open("LBmedium.txt", "a") as f:
-                for i in range(f.readlines()):
-                    f.write("Guest"+counter+":"+leaderboards[difficulty][i]+"\n")
-        case 1:
-            with open("LBhard.txt", "w") as f:
-                f.write("")
-            with open("LBhard.txt", "a") as f:
-                for i in range(f.readlines()):
-                    f.write("Guest"+counter+":"+leaderboards[difficulty][i]+"\n")
-
-@app.get("/get/lb/{difficulty}")
-def getLB(difficulty: int):
-    match (difficulty):
-        case 1:
-            with open("LBeasy.txt","r") as f:
-                return f.readlines()
-        case 2:
-            with open("LBmedium.txt","r") as f:
-                return f.readlines()
-        case 3:
-            with open("LBhard.txt","r") as f:
-                return f.readlines()
 
 @app.get("/ping/{ID}")
 def ping(ID: str):
