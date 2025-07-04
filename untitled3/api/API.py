@@ -42,56 +42,9 @@ def read_root():
     return list(IDList.keys())
 
 
-@app.get("/init_id/{difficulty}/{multi}")
-def init_id(difficulty: int, multi: bool, code: int = Query(default=None)):
-    with lock:
-        if multi:
-            if code not in MultiList:
-                raise HTTPException(status_code=404, detail="Multiplayer room not found")
+@app.get("/init_id/{difficulty}/{code}")
+def init_id(difficulty: int,code:int,multi: bool= Query()):
 
-            room = MultiList[code]
-            if room["contplayer"] >= 1:
-                raise HTTPException(status_code=400, detail="Room already initialized")
-
-            # Create solution and store in MultiList
-            if difficulty == 1:
-                tries = 10
-                solution = list(range(1, 4))
-                shuffle(solution)
-            elif difficulty == 2:
-                tries = 8
-                solution = list(range(1, 8))
-                shuffle(solution)
-                solution = solution[:4]
-            elif difficulty == 3:
-                tries = 6
-                solution = list(range(1, 9))
-                shuffle(solution)
-            else:
-                raise HTTPException(status_code=400, detail="Invalid difficulty")
-
-            ID = str(uuid4())
-            MultiList[code].update({
-                "solution": solution,
-                "tries": tries,
-                "difficulty": difficulty,
-                "contplayer": 1,
-                "players": [ID],
-                "winner": None
-            })
-
-            IDList[ID] = {
-                'difficolta': difficulty,
-                'tentativi': tries,
-                'soluzione': solution,
-                'last_ping': datetime.utcnow(),
-                'time': time.time(),
-                'start': None  # Will be set when second player joins
-            }
-
-            return {"id": ID, "status": "waiting for second player", "code": code}
-
-        # Singleplayer fallback
         if difficulty == 1:
             tries = 10
             solution = list(range(1, 4))
@@ -100,7 +53,6 @@ def init_id(difficulty: int, multi: bool, code: int = Query(default=None)):
             tries = 8
             solution = list(range(1, 8))
             shuffle(solution)
-            solution = solution[:4]
         elif difficulty == 3:
             tries = 6
             solution = list(range(1, 9))
@@ -109,15 +61,24 @@ def init_id(difficulty: int, multi: bool, code: int = Query(default=None)):
             raise HTTPException(status_code=400, detail="Invalid difficulty")
         solution = solution[:4]
         ID = str(uuid4())
+        print(ID)
         IDList[ID] = {
             'difficolta': difficulty,
             'tentativi': tries,
             'soluzione': solution,
             'last_ping': datetime.utcnow(),
             'time': time.time(),
-            'start': time.time()
+            'start': time.time(),
+            'win': 0
         }
-        return {"id": ID}
+
+        if multi:
+            room = MultiList[code]
+            MultiList[code]['IDs'].append(ID)
+            IDList[ID]['soluzione'] = room['solution']
+        print(room['solution'])
+
+        return ID
 
 
 @app.get("/create")
@@ -130,19 +91,16 @@ def create_multi(difficulty: int = Query(...)):
     elif difficulty == 2:
         solution = list(range(1, 8))
         shuffle(solution)
-        solution = solution[:4]
     elif difficulty == 3:
         solution = list(range(1, 9))
         shuffle(solution)
     else:
         raise HTTPException(status_code=400, detail="Invalid difficulty")
-
+    solution = solution[:4]
     MultiList[randnum] = {
         "contplayer": 0,
         "solution": solution,
-        "difficulty": difficulty,
-        "players": [],  # To track all player IDs
-        "winner": None
+        "IDs": [],
     }
     return randnum
 
@@ -155,32 +113,19 @@ def join(code: int):
 
         room = MultiList[code]
 
-        if room["contplayer"] != 1:
+        if room["contplayer"] != 0:
             raise HTTPException(status_code=400, detail="Room not available or already full")
 
         # Second player joins
-        ID = str(uuid4())
         room["contplayer"] += 1
-        room["players"].append(ID)
 
-        # Set start time for both players
-        start_time = time.time()
+        return room["contplayer"]
 
-        for player_id in room["players"]:
-            if player_id in IDList:
-                IDList[player_id]["start"] = start_time
 
-        IDList[ID] = {
-            'difficolta': room["difficulty"],
-            'tentativi': room["tries"],
-            'soluzione': room["solution"],
-            'last_ping': datetime.utcnow(),
-            'time': start_time,
-            'start': start_time
-        }
-
-        return {"id": ID, "status": "game started", "players": room["players"]}
-
+@app.get("/joincheck/{code}")
+def joincheck(code:int):
+    room = MultiList[code]
+    return room["contplayer"]
 
 
 @app.get("/check/{ID}")
@@ -226,11 +171,18 @@ def getLB():
 
 @app.get("/ping/{ID}")
 def ping(ID: str):
+
     with lock:
         if ID not in IDList:
             raise HTTPException(status_code=404, detail="ID not found")
         IDList[ID]['last_ping'] = datetime.utcnow()
-    return {"status": "pong", "id": ID, "timestamp": IDList[ID]['last_ping'].isoformat()}
+        if IDList[ID]['win'] == 1:
+            return 1
+        elif IDList[ID]['win'] == 2:
+            return 2
+        else:
+            return 0
+
 
 
 def cleanup_inactive_ids():
@@ -246,8 +198,8 @@ def cleanup_inactive_ids():
 
 
 threading.Thread(target=cleanup_inactive_ids, daemon=True).start()
-@app.get("/checkcolor/{ID}")
-def check_colour(ID: str, player_colour: list[int] = Query()):
+@app.get("/checkcolor/{ID}/{code}")
+def check_colour(ID: str,code:int, player_colour: list[int] = Query(...)):
 
     correct_colour = IDList[ID]['soluzione']
 
@@ -268,7 +220,7 @@ def check_colour(ID: str, player_colour: list[int] = Query()):
     return list(risposte)
 
 @app.get("/profile/add/{user}")
-def add_profilo(user: str, password: str = Query():
+def add_profilo(user: str, password: str = Query()):
     exist = -1
     with open("profili.txt","a+") as file:
         for line in file:
